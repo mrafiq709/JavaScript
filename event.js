@@ -13,18 +13,18 @@ function myFunctionOnChange() {
 
 // onmouseover event
 function onMouseOver(){
-	elemId('mouseOver').style.backgroundColor = "lightgreen";
+	$('#mouseOver').style.backgroundColor = "lightgreen";
 }
 
 // onmouseout
 function onMouseOut(){
-	elemId('mouseOver').style.backgroundColor = "lightblue";
+	$('#mouseOver').style.backgroundColor = "lightblue";
 }
 
 var cnt = 0;
 // onkeydown
 function onKeyPress(){
-	elemId('keyPress').innerHTML = "keyPress" + cnt;
+	$('#keyPress').innerHTML = "keyPress" + cnt;
 	cnt++;
 }
 
@@ -36,9 +36,4 @@ function myOnLoad(){
 // querySelector
 function $(elem) {
   return document.querySelector(elem);
-}
-
-// Get Element By Id
-function elemId(elem) {
-  return document.getElementById(elem);
 }
