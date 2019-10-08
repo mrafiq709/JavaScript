@@ -46,6 +46,11 @@ function serverMessage(){
 	}
 }
 
+// reset function
+function myResetFunction(){
+	alert("The form was reset");
+}
+
 // querySelector
 function $(elem) {
   return document.querySelector(elem);
