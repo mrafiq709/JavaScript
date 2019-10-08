@@ -33,6 +33,19 @@ function myOnLoad(){
 	alert('Page Loaded !');
 }
 
+//Receive Server Message
+function serverMessage(){
+	if(typeof(EventSource) !== "undefined") {
+	  	var source = new EventSource("demo_sse.php");
+	  	source.onmessage = function(event) {
+
+	    	$('#messageFromServer').innerHTML += event.data + "<br>";
+	  	};
+	} else {
+	  	$('messageFromServer').innerHTML = "Sorry, your browser does not support server-sent events...";
+	}
+}
+
 // querySelector
 function $(elem) {
   return document.querySelector(elem);
