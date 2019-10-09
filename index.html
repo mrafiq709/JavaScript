@@ -14,10 +14,10 @@
 <div class="row container">
 	<div class="col s12">
 
-		<h6 class="underline">onclick Event:</h6>
+		<h6 class="underline bold">onclick Event:</h6>
 		<button onclick="displayDate()">The time is?</button>
 
-		<h6 class="underline">onchange Event:</h6>
+		<h6 class="underline bold">onchange Event:</h6>
 	    <select class="browser-default" id="mySelect" onchange="myFunctionOnChange()">
 	      <option value="" disabled selected>Choose your option</option>
 	      <option value="1">Option 1</option>
@@ -27,25 +27,54 @@
 
 		<p id="demo"></p>
 
-		<h6 class="underline">onmouseover event</h6>
+		<h6 class="underline bold">onmouseover event</h6>
 		<div class="box" id="mouseOver" onmouseover="onMouseOver()" onmouseout="onMouseOut()"></div>
 
-		<h6 class="underline">onkeydown Event:</h6>
+		<h6 class="underline bold">onkeydown Event:</h6>
 		<input type="text" onkeydown="onKeyPress()">
 		<p id="keyPress"></p>
 
-		<h6 class="underline" >onload event:</h6>
+		<h6 class="underline bold" >onload event:</h6>
 		<p>Call the onload script function from html body tag.</p>
 
-		<h6 class="underline">onmessage Event(event receive from server side code):</h6>
+		<h6 class="underline bold">onmessage Event(event receive from server side code):</h6>
 		<!-- <script type="text/javascript">serverMessage()</script> -->
 		<div id="messageFromServer">Uncomment the script code to see changes.<br/></div>
 
-		<h6 class="underline">reset event:</h6>
+		<h6 class="underline bold">reset event:</h6>
 		<form onreset="myResetFunction()">
   			Enter name: <input type="text">
   			<input type="reset">
 		</form>
+
+		<h6 class="underline bold">ontoggle event:</h6>
+		<details ontoggle="myAlert()">
+			<summary>Copyright 1999-2014.</summary>
+			<p> - by Refsnes Data. All Rights Reserved.</p>
+			<p>All content and graphics on this web site are the property of the company Refsnes Data.</p>
+		</details>
+
+		<h6 class="underline bold">ontouchmove event:</h6>
+		<p ontouchmove="myTouchMoveFunction(event)">Touch this paragraph, and move the finger to trigger a function that will display the x and y coordinates of the touch, according the the document:</p>
+		<p><strong>Note:</strong> This example is for touch devices only.</p>
+		<p id="demo1"></p>
+
+		<h6 class="underline bold">Identify Mouse Button:</h6>
+		<div onmousedown="WhichButton(event)">Click this text with one of your mouse buttons to return a number.
+		  <p>
+			  0 = The left mouse button<br>
+			  1 = The middle mouse button<br>
+			  2 = The right mouse button
+		  </p>
+
+		  <p><strong>Note:</strong> Internet Explorer 8, and earlier, returns another result:</p>
+
+		  <p>
+			  1 = The left mouse button<br>
+			  4 = The middle mouse button<br>
+			  2 = The right mouse button
+		  </p>
+		</div>
 
 	</div>
 </div>

@@ -42,13 +42,27 @@ function serverMessage(){
 	    	$('#messageFromServer').innerHTML += event.data + "<br>";
 	  	};
 	} else {
-	  	$('messageFromServer').innerHTML = "Sorry, your browser does not support server-sent events...";
+	  	$('#messageFromServer').innerHTML = "Sorry, your browser does not support server-sent events...";
 	}
 }
 
 // reset function
 function myResetFunction(){
 	alert("The form was reset");
+}
+
+function myAlert(){
+	alert('Yehh! Working.')
+}
+
+function myTouchMoveFunction(event){
+	var x = event.touches[0].clientX;
+  	var y = event.touches[0].clientY;
+  	$('#demo1').innerHTML = x + ", " + y;
+}
+
+function WhichButton(event) {
+  alert("You pressed button: " + event.button)
 }
 
 // querySelector
