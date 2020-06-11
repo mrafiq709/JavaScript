@@ -3,39 +3,39 @@ class Tree {
 	/**
 	 * Initialize tree
 	 */
-	constructor() {
+	static init() {
 		this.tree = [];
-		this.mappedArr = {};
+		this.mapped_arr = {};
 	}
 
 	/**
 	 * @desc Bulid category tree
 	 * @param array data category from db
 	 */
-	buildTree(data) {
+	static buildTree(data) {
 		
 		// Build a hash table and map data to objects
 		for(var i=0; i<data.length; i++) {
 			var id = parseInt(data[i].id);
-			if(!this.mappedArr.hasOwnProperty(id)) {
-				this.mappedArr[id] = data[i];
-				this.mappedArr[id].children = [];
+			if(!this.mapped_arr.hasOwnProperty(id)) {
+				this.mapped_arr[id] = data[i];
+				this.mapped_arr[id].children = [];
 			}
 		}
 
 		// Loop over hash table
-		for(var id in this.mappedArr){
-			if(this.mappedArr.hasOwnProperty(id)) {
-				var mappedElem = this.mappedArr[id];
+		for(var id in this.mapped_arr){
+			if(this.mapped_arr.hasOwnProperty(id)) {
+				var mapped_elem = this.mapped_arr[id];
 
 				// If the element is not at the root level, add it to its parent array of children.
 				// Note this will continue till we have only root level elements left
-				if(parseInt(mappedElem.parent_id)) {
-					var parent_id = parseInt(mappedElem.parent_id);
-					this.mappedArr[parent_id].children.push(mappedElem);
+				if(parseInt(mapped_elem.parent_id)) {
+					var parent_id = parseInt(mapped_elem.parent_id);
+					this.mapped_arr[parent_id].children.push(mapped_elem);
 				} else {
 					// If the element is at the root level, directly push to the tree
-					this.tree.push(mappedElem);
+					this.tree.push(mapped_elem);
 				}
 			}
 		}
@@ -47,16 +47,16 @@ class Tree {
 	 * @param	Node	child 		category
 	 * @return void
 	 */
-	addNode(node) {
+	static addNode(node) {
 
 		// add the new child in maapedArr
-		if(!this.mappedArr.hasOwnProperty(node.id)) {
-			this.mappedArr[node.id] = node;
-			this.mappedArr[node.id].children = [];
+		if(!this.mapped_arr.hasOwnProperty(node.id)) {
+			this.mapped_arr[node.id] = node;
+			this.mapped_arr[node.id].children = [];
 		}
 
 		// Add the child to it's parent node
-		this.mappedArr[node.parent_id].children.push(node);
+		this.mapped_arr[node.parent_id].children.push(node);
 	}
 
 	/**
@@ -64,8 +64,8 @@ class Tree {
 	 * 
 	 * @param 	int	node_id id of the child node
 	 */
-	getParent(node_id) {
-		return this.mappedArr[this.mappedArr[node_id].parent_id];
+	static getParent(node_id) {
+		return this.mapped_arr[this.mapped_arr[node_id].parent_id];
 	}
 
 	/**
@@ -75,15 +75,22 @@ class Tree {
 	 * 
 	 * @rerurn string
 	 */
-	getNode(id) {
-		return this.mappedArr[id];
+	static getNode(id) {
+		return this.mapped_arr[id];
 	}
 
-	removeNode(id) {
+	/**
+	 * @desc	Remove Node
+	 * 
+	 * @param	int	id	id of the node 
+	 * 
+	 * @return	string
+	 */
+	static removeNode(id) {
 
-		// delete from mappedArr
-		if(this.mappedArr.hasOwnProperty(id)) {
-			delete this.mappedArr[id];
+		// delete from mapped_arr
+		if(this.mapped_arr.hasOwnProperty(id)) {
+			delete this.mapped_arr[id];
 		}else {
 			return 'Not Found';
 		}
@@ -93,7 +100,15 @@ class Tree {
 
 	}
 
-	removeNodeFromTree(tree, target_id) {
+	/**
+	 * @desc	Remove node from Tree
+	 * 
+	 * @param	Tree	tree		this.tree
+	 * @param	int		target_id	id of the removable node
+	 * 
+	 * @return	string
+	 */
+	static removeNodeFromTree(tree, target_id) {
 
 		for(var i=0; i<tree.length; i++){
 			if(tree[i].id == target_id) {
@@ -109,7 +124,15 @@ class Tree {
 		return 'Removed'
 	}
 
-	getTree() {
+	static countAncestor(node) {
+
+		if(node.parent_id == 0) {
+			return 1;
+		}
+		return this.countAncestor(this.getParent(node.id)) + 1;
+	}
+
+	static getTree() {
 		return this.tree;
 	}
 }
@@ -127,31 +150,31 @@ class Node {
 }
 
 
-var tree = new Tree();
+// var tree = new Tree();
 
-var cats_data = Client.pageData.cats_db;
-tree.buildTree(cats_data);
+// var cats_data = Client.pageData.cats_db;
+// tree.buildTree(cats_data);
 
-console.log('Tree init:')
-console.log(JSON.stringify(tree.getTree(), null, " "));
+// console.log('Tree init:')
+// console.log(JSON.stringify(tree.getTree(), null, " "));
 
-console.log('Parent of node 3:');
-console.log(tree.getParent(3));
+// console.log('Parent of node 3:');
+// console.log(tree.getParent(3));
 
-console.log('Add node 7:');
-tree.addNode(new Node(7, 'new', cats_data[0], 4));
+// console.log('Add node 7:');
+// tree.addNode(new Node(7, 'new', cats_data[0], 4));
 
-console.log('Print tree again:')
-console.log(JSON.stringify(tree.getTree(), null, " "));
+// console.log('Print tree again:')
+// console.log(JSON.stringify(tree.getTree(), null, " "));
 
-console.log('Get Node 7:');
-console.log(tree.getNode(7));
+// console.log('Get Node 7:');
+// console.log(tree.getNode(7));
 
-console.log('Remove Node 7:')
-console.log(tree.removeNode(7));
+// console.log('Remove Node 7:')
+// console.log(tree.removeNode(7));
 
-console.log('Print tree again:')
-console.log(JSON.stringify(tree.getTree(), null, " "));
+// console.log('Print tree again:')
+// console.log(JSON.stringify(tree.getTree(), null, " "));
 
-console.log('Remove Node 7 again:')
-console.log(tree.removeNode(7));
+// console.log('Remove Node 7 again:')
+// console.log(tree.removeNode(7));
