@@ -123,7 +123,13 @@ class Tree {
 
 		return 'Removed'
 	}
-
+	
+	/**
+	 * @desc	Count total number upper nodes
+	 * 
+	 * @param	Node	node	node
+	 * @return	int
+	 */
 	static countAncestor(node) {
 
 		if(node.parent_id == 0) {
@@ -131,7 +137,30 @@ class Tree {
 		}
 		return this.countAncestor(this.getParent(node.id)) + 1;
 	}
+	
+	/**
+	 * @desc	Check is in subcategory or not
+	 * 
+	 * @param 	Node	node			source node
+	 * @param 	Node	target_node		This node is a subcategory of source node or not
+	 * @return	boolean
+	 */
+	static isSubCat(node, target_node) {
 
+		if(typeof target_node == 'undefined') {
+			return 0;
+		}
+
+		if(target_node.parent_id == node.id) {
+			return 1;
+		}
+
+		return this.isSubCat(node, this.getNode(target_node.parent_id));
+	}
+
+	/**
+	 * @desc	Get the tree structure
+	 */
 	static getTree() {
 		return this.tree;
 	}
